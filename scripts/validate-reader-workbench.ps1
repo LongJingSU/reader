@@ -52,8 +52,12 @@ foreach ($chapter in $book.chapters) {
 }
 foreach ($assetUrl in $assetUrls) {
     $assetRelative = $assetUrl.TrimStart('/').Replace('/', '\')
-    if (-not (Test-Path -LiteralPath (Join-Path $project ('public\' + $assetRelative)) -PathType Leaf)) {
+    $assetPath = Join-Path $project ('public\' + $assetRelative)
+    if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) {
         throw "Referenced offline asset is missing: $assetUrl"
+    }
+    if ((Get-Item -LiteralPath $assetPath).Length -eq 0) {
+        throw "Referenced offline asset is empty: $assetUrl"
     }
 }
 
@@ -69,6 +73,18 @@ $pageRequirements = [ordered]@{
 }
 foreach ($requirement in $pageRequirements.GetEnumerator()) {
     if ($pageSource -notmatch [regex]::Escape([string]$requirement.Value)) {
+        throw "Reader implementation is missing $($requirement.Key)."
+    }
+}
+
+$imageRecoveryRequirements = [ordered]@{
+    'native image error listener' = '(?is)addEventListener\s*\(\s*[''"]error[''"]'
+    'cached broken-image detection' = '(?is)\.complete\s*&&[^\r\n;]*\.naturalWidth\s*===?\s*0'
+    'cache-busting image retry' = '(?is)searchParams\.set\s*\(\s*[''"][^''"]*retry[^''"]*[''"]'
+    'single-retry guard' = '(?is)dataset\.[A-Za-z0-9_]*[Rr]etried|data-[A-Za-z0-9_-]*retry'
+}
+foreach ($requirement in $imageRecoveryRequirements.GetEnumerator()) {
+    if ($pageSource -notmatch [string]$requirement.Value) {
         throw "Reader implementation is missing $($requirement.Key)."
     }
 }
