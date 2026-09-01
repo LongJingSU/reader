@@ -1,0 +1,7 @@
+interface:
+  display_name: "本地电子书阅读工作台"
+  short_description: "把一本书制作为可高亮、批注和本地保存的专属阅读器"
+  default_prompt: "Use $reader to turn this book into a private local reading workbench."
+
+policy:
+  allow_implicit_invocation: true
