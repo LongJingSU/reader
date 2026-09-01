@@ -1,74 +1,74 @@
-# Outcome-Oriented Source Acquisition
+# 结果导向的书源获取规范
 
-Use this reference only when the user names a book but does not provide a usable local file.
+只有当用户说出书名、但没有提供可用本地文件时，才需要阅读本规范。
 
-## Search order
+## 搜索语言与版本顺序
 
-Determine the target language before searching. Use the language of the user's conversation unless they explicitly request another edition. For Chinese requests:
+搜索前先确定目标语言。除非用户明确要求其他版本，否则使用用户的对话语言。中文请求按以下顺序处理：
 
-1. search the exact Chinese title and author, preferring a complete Simplified Chinese edition;
-2. search known alternate Chinese titles, translator names, publisher pages, and ISBNs;
-3. check a complete Traditional Chinese edition when Simplified Chinese is unavailable;
-4. propose the original-language or another-language edition only after clearly reporting the Chinese-edition result.
+1. 搜索准确的中文书名和作者，优先完整的简体中文版；
+2. 搜索常见的其他中文译名、译者、出版社页面和 ISBN；
+3. 简体中文版不可用时，检查完整的繁体中文版；
+4. 只有在明确说明中文版本结果后，才提出原文版或其他语言版本。
 
-Do not silently substitute an English original for a requested Chinese translation. Machine translation of an entire copyrighted book is not a substitute for acquiring an authorized Chinese edition.
+不能用英文原版静默替代用户要求的中文版。对仍受版权保护的整本书进行机器翻译，不能替代取得有授权的中文版。
 
-## Success contract
+## 成功标准
 
-Classify the result as one of these states:
+将结果归为以下三种状态：
 
-- `LOCAL_FILE_READY`: a complete local file exists, opens successfully, matches the requested language and edition, and is ready for extraction or OCR;
-- `ONE_USER_ACTION_REQUIRED`: an exact authorized copy has been verified, but the user must perform one bounded action such as purchasing, borrowing, signing in, exporting, uploading their owned file, or supplying scans;
-- `NO_AUTHORIZED_COPY_FOUND`: all applicable source classes below were checked and none produced a usable local copy.
+- `LOCAL_FILE_READY`：完整本地文件已经存在，可以正常打开，语言和版本正确，并能继续解包或 OCR；
+- `ONE_USER_ACTION_REQUIRED`：已经确认准确且有授权的版本，但用户还需完成一个有限动作，例如购买、借阅、登录、导出、上传已拥有的文件或提供扫描件；
+- `NO_AUTHORIZED_COPY_FOUND`：已经检查下方所有适用来源，仍未取得可用本地文件。
 
-Only `LOCAL_FILE_READY` counts as “found and downloaded.” Do not present a retailer listing, catalog record, preview, or app-only reading page as successful delivery. Keep provenance and failed-search detail in the work record; lead the user-facing response with whether the book can be opened locally.
+只有 `LOCAL_FILE_READY` 才算“已经找到并下载”。商城页面、图书目录、试读内容或只能在应用内阅读的页面均不算成功交付。来源证明和失败搜索过程写入后台记录；面向用户先说明书籍能否在本地打开。
 
-## Exhaustive discovery
+## 穷尽适用来源
 
-1. Search the author and publisher sites for an official download, companion edition, translation, or temporary free promotion.
-2. Check authorized ebook retailers and reading services for downloadable, printable, or supported user-exportable editions; keep searching when a service is in-app-only.
-3. Check national, provincial, municipal, university, and institutional library catalogs for digital loans or downloadable collections available to the user.
-4. Check public-domain and open-license sources appropriate to the language, such as Project Gutenberg, Standard Ebooks, Wikisource, Internet Archive collections with clear access rights, and official institutional repositories.
-5. Check alternate editions: original and translated titles, older editions, revised editions, translator names, publishers, and each known ISBN.
-6. If the user already owns or can access the book, use the provider's normal download/export controls or ask for the smallest user action needed to supply that file.
-7. If the user owns a paper copy, accept their scans or page photos and use OCR. Do not ask the user to capture a gated online book page by page.
-8. If the work is public domain or openly licensed for derivatives and no requested-language edition exists, acquire the authorized original and produce a clearly labeled machine-assisted translation for the private reader.
+1. 检查作者与出版社网站，寻找官方下载、配套版本、翻译版本或限时免费活动；
+2. 检查授权电子书商城和阅读服务，寻找可下载、可打印或支持用户正常导出的版本；如果只能在应用内阅读，继续检查其他来源；
+3. 检查国家、省市、大学和机构图书馆目录，寻找用户可使用的数字借阅或下载资源；
+4. 检查对应语言的公版与开放许可来源，例如 Project Gutenberg、Standard Ebooks、Wikisource、权利状态明确的 Internet Archive 馆藏和官方机构资料库；
+5. 检查其他版本：原文书名、译名、旧版、修订版、译者、出版社和每一个已知 ISBN；
+6. 用户已经购买或能够访问该书时，使用平台正常的下载或导出功能，或只请求用户完成提供文件所需的最小动作；
+7. 用户拥有纸质书时，接收其扫描件或页面照片并进行 OCR；不能要求用户把受限制的在线阅读器逐页截取下来；
+8. 作品属于公版或开放许可证允许改编，且目标语言没有合适版本时，获取有授权的原文，并为私人阅读器制作明确标注的机器辅助翻译。
 
-For each route, try the title, original title, author, translator, publisher, ISBN, and common format terms (`EPUB`, `PDF`, `HTML`, `TXT`) as appropriate. Compare multiple candidate pages, verify that a real download or entitled export exists, and prefer EPUB/HTML over fixed-layout PDF for the workbench. A lawful result may be free, borrowed, purchased, or supplied by the user; it does not have to be zero-cost.
+每条路径都可以组合使用书名、原文书名、作者、译者、出版社、ISBN 和常见格式词（`EPUB`、`PDF`、`HTML`、`TXT`）进行检索。比较多个候选页面，确认是否真的存在下载或用户有权使用的导出功能。阅读工作台优先使用 EPUB 或 HTML，其次才是固定版式 PDF。可用来源可以是免费、借阅、购买或用户提供，不要求必须零成本。
 
-Search for an obtainable file, not merely evidence that the book exists. Continue after finding a platform-only edition when other source classes remain unchecked. Prefer primary provider pages for acquisition and use metadata/catalog pages only to discover alternate titles, ISBNs, editions, and holdings.
+目标是找到可以取得的文件，而不仅是证明这本书存在。即使找到平台内阅读版本，只要还有其他来源类别尚未检查，就继续搜索。获取文件优先依赖作者、出版社、图书馆或销售平台等第一方页面；书目页面只用于发现其他书名、ISBN、版次和馆藏信息。
 
-When a candidate file is available:
+出现候选文件后：
 
-1. save it to a bounded local destination;
-2. check its extension, MIME/signature, byte size, and archive/PDF integrity;
-3. open or extract enough content to verify title, author, language, completeness, and absence of an unrelated or sample-only work;
-4. hash it and record provenance;
-5. move immediately into reader construction when checks pass.
+1. 保存到范围明确的本地目录；
+2. 检查扩展名、MIME 或文件签名、大小，以及压缩包或 PDF 的完整性；
+3. 打开或解包足够内容，核对书名、作者、语言、完整性，排除无关文件和仅含试读内容的文件；
+4. 计算哈希并记录来源；
+5. 检查通过后，立即进入阅读器制作，不要继续无意义搜索。
 
-If no immediately downloadable copy exists but an exact authorized route is verified, ask for only the action that unlocks progress—for example, “请购买并点击平台的 EPUB 导出，然后把文件发给我” or “请上传你这本纸书的扫描件.” Do not end with a long generic list of bookstores. Resume the build as soon as the file is available.
+如果没有可以直接下载的副本，但已经确认一个准确的授权路径，只向用户请求能够继续工作的那个动作，例如“请购买后使用平台的 EPUB 导出功能，再把文件发给我”或“请上传你这本纸书的扫描件”。不要以一长串商城链接结束任务。取得文件后立即继续制作。
 
-Verify the exact title, author, edition, language, publisher, file type, and whether the source actually grants download or offline use. Save the canonical page URL and the acquisition date.
+核对准确书名、作者、版次、语言、出版社、文件格式，以及来源是否允许下载或离线使用。保存规范来源页面和获取日期。
 
-## Stop conditions
+## 停止条件
 
-Do not:
+不能：
 
-- use piracy indexes, shadow libraries, unauthorized mirrors, torrents, leaked cloud-drive links, or search snippets that merely claim a free copy exists;
-- bypass login, payment, geographic controls, rate limits, robots controls, or expiring access restrictions;
-- strip or defeat DRM, decrypt protected files, capture an entire gated book page by page, or reuse another person's account/session;
-- treat “personal use” as proof that copying is authorized.
+- 使用盗版索引、影子图书馆、未授权镜像、BT、泄露网盘链接，或只凭搜索摘要声称存在免费文件；
+- 绕过登录、付费、地区限制、速率限制、robots 控制或有时效的访问限制；
+- 去除或破解 DRM、解密受保护文件、逐页抓取受限制的整本在线书，或使用他人的账号和会话；
+- 把“仅供个人使用”当作复制行为已经获得授权的证明。
 
-If only preview chapters are lawfully accessible, do not represent them as the complete book. Tell the user what is available and offer the shortest legitimate path to a full local file.
+如果只能合法取得试读章节，不能把它描述成完整书籍。只说明当前能取得的内容，并给出获得完整本地文件的最短正规路径。
 
-Do not guarantee success when the rights holder offers no local-file edition and the user has not supplied an owned copy. Persistence means exhausting credible authorized routes and minimizing the remaining user action, not fabricating availability or using an unauthorized source.
+当权利方没有提供本地文件版本，而用户也没有提供自己拥有的副本时，不能保证一定成功。坚持结果导向意味着穷尽可信来源，并把剩余用户动作压缩到最小，而不是虚构可下载性或使用未授权来源。
 
-## Provenance record
+## 来源记录
 
-Record:
+记录：
 
-- canonical source URL and provider;
-- visible price/free/lending status at acquisition time;
-- title, author, edition/translation, publisher, ISBN when available;
-- local source path, byte size, format, and SHA-256;
-- access or evidence limitations.
+- 规范来源链接和提供方；
+- 获取时可见的价格、免费或借阅状态；
+- 书名、作者、版次或翻译版本、出版社，以及可用时的 ISBN；
+- 本地文件路径、字节大小、格式和 SHA-256；
+- 访问限制与证据限制。

@@ -1,39 +1,39 @@
-# Book Format Routing
+# 书籍格式处理规范
 
-Choose the rendering model that preserves the useful reading experience of the supplied source.
+根据用户提供的来源选择能够保留有效阅读体验的处理方式。
 
-## Scans and page photos
+## 扫描件和页面照片
 
-For user-supplied scans or photographs of a copy they own:
+处理用户自己拥有的纸书扫描件或页面照片时：
 
-1. preserve the originals unchanged;
-2. deskew, rotate, crop, and order pages when needed;
-3. OCR in the requested language and retain page boundaries for traceability;
-4. verify a sample from the beginning, middle, and end before building the reader;
-5. use reflowable text when OCR quality is reliable, otherwise retain page images with a searchable OCR layer.
+1. 保留原始文件，不做覆盖修改；
+2. 必要时校正倾斜、旋转、裁边并整理页序；
+3. 使用目标语言进行 OCR，并保留页码边界，方便追溯；
+4. 在制作阅读器前，分别抽查开头、中间和结尾的识别结果；
+5. OCR 质量可靠时使用流式正文；质量不足时保留页面图片，同时附加可搜索的 OCR 文字层。
 
-Do not use this route to capture an entire gated web reader or defeat access controls.
+不能利用这一方式逐页抓取受访问限制的在线阅读器，也不能绕过访问控制。
 
-## EPUB or accessible HTML
+## EPUB 或可访问的 HTML
 
-Use a reflowable reader. Follow the EPUB container and OPF spine order, preserve semantic block structure, localize images, sanitize active content, and store one chapter record per spine document. EPUB is the preferred input for the current workbench.
+使用流式阅读器。按照 EPUB 容器、OPF 书脊顺序处理章节，保留有语义的内容结构，把图片全部本地化，清除主动脚本，并为每个书脊文档保存一条章节记录。EPUB 是当前阅读工作台的首选输入格式。
 
-## TXT or Markdown
+## TXT 或 Markdown
 
-Use a reflowable reader. Detect encoding, preserve paragraphs and intentional separators, and infer chapters conservatively from explicit headings. Do not invent chapter titles when the source has none.
+使用流式阅读器。检测文字编码，保留段落和有意设置的分隔符，只根据明确标题谨慎判断章节。原文没有章节标题时，不要自行编造。
 
 ## DOCX
 
-Use the documents skill to extract headings, paragraphs, lists, tables, images, captions, footnotes, and order. Convert to sanitized semantic HTML, not screenshots of pages, unless layout fidelity is the user's primary requirement.
+使用 documents skill 提取标题、段落、列表、表格、图片、图注、脚注和内容顺序。转换成经过清洗的语义化 HTML。除非用户更重视原版页面布局，否则不要把每页简单转成截图。
 
 ## PDF
 
-Use the PDF skill to determine whether the file has a usable text layer and whether it is fixed-layout or scanned.
+使用 PDF skill 判断文件是否具有可用文字层，以及它属于固定版式还是扫描版。
 
-- For ordinary text PDFs, prefer a reflowable semantic reader when extraction preserves reading order.
-- For fixed-layout, illustrated, or scanned books, preserve page appearance with local PDF rendering and attach annotations to page coordinates. Do not claim reflow fidelity when OCR or reading order is uncertain.
-- Keep the original PDF untouched and make OCR/search text a derived artifact with its confidence limitations recorded.
+- 普通文字 PDF 在阅读顺序可靠时，优先转换为流式语义正文；
+- 固定版式、插图较多或扫描版书籍，使用本地 PDF 页面渲染保留原貌，并按页面坐标保存批注；OCR 或阅读顺序不可靠时，不要声称已经实现准确流式排版；
+- 原始 PDF 保持不变。OCR 和搜索文字作为派生资料保存，并记录其准确度限制。
 
-## Multiple volumes or mixed files
+## 多卷或混合文件
 
-Do not silently merge editions. Confirm which files belong to the same book, preserve their order, and give each volume a stable identity and storage namespace.
+不要默默合并不同版本。确认哪些文件属于同一本书，保留正确顺序，并为每一卷分配稳定的书籍标识和本地存储命名空间。
