@@ -2,6 +2,18 @@
 
 Choose the rendering model that preserves the useful reading experience of the supplied source.
 
+## Scans and page photos
+
+For user-supplied scans or photographs of a copy they own:
+
+1. preserve the originals unchanged;
+2. deskew, rotate, crop, and order pages when needed;
+3. OCR in the requested language and retain page boundaries for traceability;
+4. verify a sample from the beginning, middle, and end before building the reader;
+5. use reflowable text when OCR quality is reliable, otherwise retain page images with a searchable OCR layer.
+
+Do not use this route to capture an entire gated web reader or defeat access controls.
+
 ## EPUB or accessible HTML
 
 Use a reflowable reader. Follow the EPUB container and OPF spine order, preserve semantic block structure, localize images, sanitize active content, and store one chapter record per spine document. EPUB is the preferred input for the current workbench.
